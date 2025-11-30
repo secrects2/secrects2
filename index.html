@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>大阪京都5日親子行 (5人家族)</title>
+    <style>
+        /* --- 基礎設定 --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, "PingFang TC", "Heiti TC",NMTRUsb, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 15px;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 1.6rem;
+            margin: 20px 0 10px;
+            color: #2c3e50;
+        }
+        
+        h2.day-header {
+            background-color: #2c3e50;
+            color: #fff;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* 不同天換個標題顏色區分 */
+        .day2 { background-color: #e67e22 !important; }
+        .day3 { background-color: #27ae60 !important; }
+        .day4 { background-color: #2980b9 !important; }
+        .day5 { background-color: #8e44ad !important; }
+
+        /* --- 重要提示區塊 --- */
+        .important-tips-box {
+            background-color: #fff4e6;
+            border-left: 6px solid #e67e22;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .tips-title {
+            font-weight: bold;
+            color: #d35400;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .tips-content ul { padding-left: 20px; margin: 5px 0; }
+        .tips-content li { margin-bottom: 8px; }
+        .highlight-red { color: #c0392b; font-weight: bold; }
+
+        /* --- 資料卡片樣式 --- */
+        .info-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-left: 4px solid #bdc3c7;
+        }
+
+        /* 重要行程卡片特別色 */
+        .card-important { border-left-color: #e74c3c; }
+
+        .card-header {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #2c3e50;
+            display: flex;
+            align-items: flex-start;
+        }
+        .time-badge {
+            background: #ecf0f1;
+            color: #7f8c8d;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            margin-right: 8px;
+            white-space: nowrap;
+        }
+
+        .card-content { font-size: 1rem; color: #555; }
+        .detail-row { margin-bottom: 8px; }
+        .label { font-weight: 600; color: #7f8c8d; margin-right: 5px;}
+        .note { font-size: 0.95rem; color: #666; font-style: italic; background: #f9f9f9; padding: 8px; border-radius: 6px; margin-top: 8px;}
+
+        /* --- 連結按鈕樣式 --- */
+        .actions-container {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .action-link {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            background-color: #eaf4ff;
+            color: #007bff;
+            text-decoration: none;
+            border-radius: 20px; /* 膠囊狀按鈕 */
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: 1px solid #d0e7ff;
+        }
+        .map-link { color: #d93025; background-color: #fce8e6; border-color: #fad2cf; }
+        .transport-link { color: #1e8e3e; background-color: #e6f4ea; border-color: #ceead6; }
+        .ticket-link { color: #f57c00; background-color: #fff3e0; border-color: #ffe0b2; }
+
+        /* --- 檢查表樣式 --- */
+        .checklist-box { background: #fff; padding: 20px; border-radius: 12px; margin-top: 30px; }
+        .checklist-item { margin-bottom: 10px; display: flex; align-items: center; }
+        .checklist-item input { margin-right: 10px; transform: scale(1.2); }
+
+        /* --- 深色模式支援 --- */
+        @media (prefers-color-scheme: dark) {
+            body { background-color: #121212; color: #e0e0e0; }
+            h1 { color: #fff; }
+            .info-card, .checklist-box { background-color: #1e1e1e; box-shadow: 0 2px 8px rgba(255,255,255,0.05); border-left-color: #555;}
+            .card-header { color: #bdc3c7; }
+            .time-badge { background: #333; color: #aaa; }
+            .card-content { color: #ccc; }
+            .label { color: #aaa; }
+            .note { background: #2c2c2c; color: #999; }
+            .important-tips-box { background-color: #2c251e; border-left-color: #d35400; color: #ddd;}
+            .tips-title { color: #e67e22; }
+            .highlight-red { color: #e74c3c; }
+            .action-link { background-color: #2c3e50; color: #8ab4f8; border-color: #34495e; }
+            .map-link { background-color: #3c2a2a; color: #f28b82; border-color: #4e3838; }
+            .transport-link { background-color: #1e3a2f; color: #81c995; border-color: #2a4f3f; }
+            .ticket-link { background-color: #3e2f21; color: #ffb74d; border-color: #4f3c2a; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🇯🇵 大阪京都5日親子行 (5人家族)</h1>
+    <p style="text-align: center; color: #7f8c8d; font-size: 0.9rem;">📅 5/21 (三) - 5/25 (日)</p>
+
+    <div class="important-tips-box">
+        <div class="tips-title">🌟 行前重要提示 (5人組必讀)</div>
+        <div class="tips-content">
+            <ul>
+                <li><span class="highlight-red">1. 餐廳預約 (最重要!)</span>：5人在日本是大組客人，熱門時段極難臨時有位。請現在立刻預訂 Day 2 燒肉和 Day 3, 4 晚餐。</li>
+                <li><strong>2. 交通策略</strong>：市區短程或有行李時，5人搭「兩台計程車」常比地鐵更省力划算。京都公車易擠爆，建議多用「地鐵+步行」或短程計程車。</li>
+                <li><strong>3. 行程彈性</strong>：家庭旅遊體力消耗快，太累隨時準備刪減行程，別有壓力。</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 class="day-header">Day 1：5/21 (三) 抵達 & 難波之夜</h2>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">09:30</span>抵達關西機場 (T1)</div>
+        <div class="card-content">
+            <div class="detail-row">10:30-11:00 入境領行李，與包車司機會合。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=關西國際機場第一航廈" target="_blank" class="action-link map-link">🗺️ 機場地圖</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">12:00</span>抵達飯店 & 午餐</div>
+        <div class="card-content">
+            <div class="detail-row"><span class="label">地點:</span>難波/心齋橋附近飯店 (先寄行李)</div>
+            <div class="detail-row"><span class="label">午餐:</span>附近簡單吃 (推: 一蘭拉麵各自一格，或地下街定食)。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=大阪難波站" target="_blank" class="action-link map-link">🗺️ 難波區域地圖</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">14:00</span>心齋橋筋商店街</div>
+        <div class="card-content">
+            <div class="detail-row">逛藥妝、服飾、伴手禮。</div>
+            <div class="note">⚠️ 注意：人潮眾多，5人容易走散，建議約定好集合時間地點。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=心齋橋筋商店街" target="_blank" class="action-link map-link">🗺️ 商店街地圖</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">16:30</span>道頓堀 & 固力果跑跑人</div>
+        <div class="card-content">
+            <div class="detail-row">走到戎橋上與固力果看板合照。吃章魚燒、菠蘿麵包冰淇淋。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=道頓堀固力果看板" target="_blank" class="action-link map-link">🗺️ 固力果看板地圖</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card card-important">
+        <div class="card-header"><span class="time-badge">18:00</span>晚餐 (道頓堀)</div>
+        <div class="card-content">
+            <div class="detail-row"><span class="label">推薦:</span>大阪燒（千房、美津之）或 炸串（串卡茲達摩）。</div>
+            <div class="note">💡 5人建議提早去或要有分開坐的心理準備。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=道頓堀美食" target="_blank" class="action-link map-link">🗺️ 搜尋附近美食</a>
+            </div>
+        </div>
+    </div>
+
+
+    <h2 class="day-header day2">Day 2：5/22 (四) 市場、歷史與燒肉</h2>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">08:30</span>木津市場 (請早起)</div>
+        <div class="card-content">
+            <div class="detail-row">當地人廚房。吃生魚片、海鮮丼早餐，買當季水果。</div>
+            <div class="note">⚠️ 注意：市場通常中午就收攤了。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=大阪木津卸売市場" target="_blank" class="action-link map-link">🗺️ 木津市場地圖</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">10:30</span>大阪城</div>
+        <div class="card-content">
+            <div class="detail-row">園區很大。建議在外面拍壯觀的天守閣合照即可。</div>
+            <div class="detail-row"><span class="label">休閒選項:</span>搭乘「大阪城御座船」遊護城河。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=大阪城天守閣" target="_blank" class="action-link map-link">🗺️ 大阪城地圖</a>
+                <a href="https://subway.osakametro.co.jp/tw/guide/routemap.php" target="_blank" class="action-link transport-link">🔗 大阪地鐵圖(官網)</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">15:00</span>難波八阪神社</div>
+        <div class="card-content">
+            <div class="detail-row">巨大的獅子頭神社，震撼力十足，拍照打卡點。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=難波八阪神社" target="_blank" class="action-link map-link">🗺️ 神社地圖</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">16:30</span>新世界 & 通天閣</div>
+        <div class="card-content">
+            <div class="detail-row">昭和懷舊氛圍。遠遠拍通天閣即可，不必登塔。體驗復古遊戲機。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=通天閣" target="_blank" class="action-link map-link">🗺️ 通天閣地圖</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card card-important">
+        <div class="card-header" style="color: #d35400;"><span class="time-badge" style="background:#ffe0b2; color:#d35400">18:30</span>晚餐：燒肉 (本日重頭戲!)</div>
+        <div class="card-content">
+            <div class="note" style="background-color: #fff3e0; color: #d35400; font-weight: bold;">🔥 強烈建議：一定要提前訂位！5人在週四晚上很難臨時找到好的燒肉位子。</div>
+            <div class="detail-row" style="margin-top:10px;"><span class="label">推薦名單:</span></div>
+            <ul style="margin: 5px 0 10px 20px; color: #555;">
+                <li>松阪牛燒肉 M (法善寺橫丁店) - 氣氛好</li>
+                <li>國產牛燒肉吃到飽 あぶりや (Aburiya) - 性價比高</li>
+                <li>空 (鶴橋燒肉名店) - 熱鬧擁擠在底感</li>
+            </ul>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=大阪燒肉推薦" target="_blank" class="action-link map-link">🗺️ 搜尋燒肉餐廳</a>
+            </div>
+        </div>
+    </div>
+
+
+    <h2 class="day-header day3">Day 3：5/23 (五) 京都經典一日遊</h2>
+    <div class="note" style="margin-bottom: 15px; background-color: #e8f5e9; color: #2e7d32;">💡 本日重點：京都人超級多，5人行動務必早起避開尖峰。多利用計程車短程接駁。</div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">07:30</span>出發前往京都</div>
+        <div class="card-content">
+            <div class="detail-row">搭乘京阪電車或JR。</div>
+            <div class="actions-container">
+                 <a href="https://www.westjr.co.jp/global/tc/timetable/" target="_blank" class="action-link transport-link">🔗 JR西日本時刻表</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">08:30</span>伏見稻荷大社</div>
+        <div class="card-content">
+            <div class="detail-row">越早到越好。建議走到半山腰的「四辻」看市景即可折返。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=伏見稻荷大社" target="_blank" class="action-link map-link">🗺️ 伏見稻荷地圖</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">11:00</span>前往清水寺區域</div>
+        <div class="card-content">
+            <div class="note" style="font-weight: bold; color: #2e7d32;">🚕 5人交通策略：</div>
+            <div class="detail-row">搭電車到「清水五條站」或「祇園四條站」後，轉搭「兩台計程車」直接上山到清水道，省去爬坡力氣。</div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">12:00</span>午餐 & 清水寺周邊</div>
+        <div class="card-content">
+            <div class="detail-row"><span class="label">午餐:</span>建議預訂湯豆腐 (如:奧丹清水、順正) 或在二年坂找蕎麥麵。</div>
+            <div class="detail-row"><span class="label">行程:</span>參觀清水寺舞台 -> 沿二年坂、三年坂往下逛街吃點心。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=清水寺" target="_blank" class="action-link map-link">🗺️ 清水寺地圖</a>
+                <a href="https://www.google.com/maps/search/?api=1&query=三年坂" target="_blank" class="action-link map-link">🗺️ 三年坂地圖</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">16:30</span>花見小路 & 祇園 & 晚餐</div>
+        <div class="card-content">
+            <div class="detail-row">傍晚欣賞傳統建築，運氣好能看到藝妓 (請勿拉扯拍照)。</div>
+            <div class="detail-row"><span class="label">晚餐:</span>祇園附近，或回京都車站吃飯。體驗推薦：「鴨川納涼床」(需預約)。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=花見小路" target="_blank" class="action-link map-link">🗺️ 花見小路地圖</a>
+            </div>
+        </div>
+    </div>
+
+
+    <h2 class="day-header day4">Day 4：5/24 (六) 北攝祈福與港灣海洋</h2>
+    <div class="note" style="margin-bottom: 15px;">⚠️ 注意：勝尾寺交通較不便，週末人潮也多。</div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">09:00</span>前往勝尾寺</div>
+        <div class="card-content">
+             <div class="detail-row"><span class="label">方式 A (公車):</span>地鐵御堂筋線到「千里中央站」，轉乘巴士 (29號系統)。務必查好時刻表。</div>
+             <div class="detail-row" style="margin-top: 8px;"><span class="label" style="color:#2980b9">方式 B (推薦計程車):</span>從千里中央站搭「兩台計程車」前往 (約 3-4000 日幣，省時很多)。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=千里中央站" target="_blank" class="action-link map-link">🗺️ 千里中央站地圖</a>
+                <a href="https://katsuo-ji-temple.or.jp/access/index.html" target="_blank" class="action-link transport-link">🔗 勝尾寺官網交通指引</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">10:30</span>勝尾寺 (達摩寺)</div>
+        <div class="card-content">
+            <div class="detail-row">滿山滿谷的祈福達摩，景色特殊，祈求勝運。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=勝尾寺" target="_blank" class="action-link map-link">🗺️ 勝尾寺地圖</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">15:00</span>海遊館 & 晚餐</div>
+        <div class="card-content">
+            <div class="detail-row">世界級水族館，看巨大鯨鯊。慢慢逛約 2-2.5 小時。</div>
+            <div class="note">💡 建議：先在網路上買好門票，避免現場排隊。</div>
+            <div class="detail-row" style="margin-top: 10px;"><span class="label">晚餐 (18:00):</span>旁邊天保山 Market Place 的「難波美食小巷」。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=大阪海遊館" target="_blank" class="action-link map-link">🗺️ 海遊館地圖</a>
+                <a href="https://www.kaiyukan.com/language/chinese_traditional/ticket.html" target="_blank" class="action-link ticket-link">🎫 海遊館購票資訊</a>
+            </div>
+        </div>
+    </div>
+
+
+    <h2 class="day-header day5">Day 5：5/25 (日) 臨空城購物 & 回家</h2>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">10:00</span>前往臨空城 Outlet</div>
+        <div class="card-content">
+            <div class="detail-row">退房，搭乘南海電鐵到「臨空城站」（機場前一站）。</div>
+            <div class="detail-row"><span class="label">寄放行李:</span>車站內置物櫃，或 Outlet 內有大型寄物區。</div>
+            <div class="detail-row">最後衝刺購物，午餐在 Outlet 美食廣場解決。</div>
+            <div class="actions-container">
+                <a href="https://www.google.com/maps/search/?api=1&query=臨空城Premium Outlets" target="_blank" class="action-link map-link">🗺️ Outlet 地圖</a>
+                <a href="https://www.howto-osaka.com/tc/" target="_blank" class="action-link transport-link">🔗 南海電鐵資訊(官網)</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card">
+        <div class="card-header"><span class="time-badge">14:00</span>前往機場 & 起飛</div>
+        <div class="card-content">
+            <div class="detail-row">從臨空城搭電車一站到關西機場 T1。</div>
+            <div class="detail-row">15:10 星宇航空起飛。</div>
+        </div>
+    </div>
+
+    <div class="checklist-box">
+        <h3 style="margin-top: 0; color: #2c3e50;">✅ 待辦事項檢查表</h3>
+        <div class="checklist-item"><input type="checkbox"><span class="highlight-red">預訂餐廳 (Day 2 燒肉優先！Day 3, 4 晚餐)</span></div>
+        <div class="checklist-item"><input type="checkbox">購買網卡/eSIM (確認長輩手機是否支援)</div>
+        <div class="checklist-item"><input type="checkbox">手機綁定西瓜卡/ICOCA (iPhone Apple Pay 最方便)</div>
+        <div class="checklist-item"><input type="checkbox">下載 App：Google Maps, 乘換案內, Payke (藥妝翻譯)</div>
+        <div class="checklist-item"><input type="checkbox">確認包車資訊 (出發前一天確認)</div>
+        <div class="checklist-item"><input type="checkbox">購買海遊館門票 (建議事先上網買)</div>
+    </div>
+
+</div>
+
+</body>
+</html>
